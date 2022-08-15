@@ -22,6 +22,7 @@ With my service class you can use the following features:
 * Get public holidays for the year and country
 * Check if today is a public holiday
 * Get the upcoming public holidays of the next 365 days
+* Filter by days off in your country
 * Read the content from the response object as JSON-String
 
 ### Built With

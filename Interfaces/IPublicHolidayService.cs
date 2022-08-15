@@ -1,4 +1,6 @@
-﻿namespace PublicHolidaysServiceClass.Interface
+﻿using PublicHolidaysServiceClass.Classes;
+
+namespace PublicHolidaysServiceClass.Interface
 {
     /// <summary>
     /// <c>IPublicHolidayService</c> - Interface
@@ -33,5 +35,15 @@
         /// <param name="response">HttpResponseMessage</param>
         /// <returns>A JSON formatted <see cref="string"/> </returns>
         public Task<string> ReadContentAsJSON(HttpResponseMessage response);
+
+        /// <summary>
+        /// Filter by days off from the public holidays JSON string.
+        /// <para>
+        /// The country code is needed to filter more specificly
+        /// </para>
+        /// </summary>
+        /// <param name="JSONString">string</param>
+        /// <returns><see cref="PublicHoliday"/> object filled in an array</returns>
+        public PublicHoliday[]? FilterByDaysOff(string JSONString, string countryCode);
     }
 }

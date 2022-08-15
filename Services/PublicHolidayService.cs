@@ -1,22 +1,18 @@
-﻿using PublicHolidaysServiceClass.Interface;
+﻿using System.Text.Json;
+using PublicHolidaysServiceClass.Classes;
+using PublicHolidaysServiceClass.Interface;
 
 namespace PublicHolidaysServiceClass.Services
 {
     /// <summary>
-    /// TODO: Write a documentation for the class
+    /// This Class contain methods to get holidays from the NagerAPI
     /// </summary>
     public class PublicHolidayService : IPublicHolidayService
     {
         private readonly HttpClient _client;
         private const string BasicURL = "https://date.nager.at/api/v3/";
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public PublicHolidayService()
-        {
-            _client = new HttpClient();
-        }
+        public PublicHolidayService() => _client = new HttpClient();
 
         public async Task<HttpResponseMessage> GetPublicHolidaysAsync(int year, string countryCode)
         {
@@ -34,6 +30,12 @@ namespace PublicHolidaysServiceClass.Services
         {
             string url = $"{BasicURL}IsTodayPublicHoliday/{countryCode}";
             return await _client.GetAsync(url);
+        }
+
+        public PublicHoliday[]? FilterByDaysOff(string JSONString, string countryCode)
+        {
+            var jsonSerializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            return JsonSerializer.Deserialize<PublicHoliday[]>(JSONString, jsonSerializerOptions);
         }
 
         public async Task<string> ReadContentAsJSON(HttpResponseMessage response)

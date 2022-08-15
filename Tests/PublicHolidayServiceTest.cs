@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
+using PublicHolidaysServiceClass.Classes;
 using PublicHolidaysServiceClass.Services;
 using System.Net;
 
@@ -167,6 +169,25 @@ namespace PublicHolidaysServiceClass.Tests
 
             // Assert
             Assert.AreEqual(expectedString, result);
+        }
+        #endregion
+
+        #region FilterByDaysOff - Test
+        [TestMethod]
+        public async Task Test_FilterByDaysOff_Success()
+        {
+            // Arrange
+            int year = 2022;
+            string countrycode = "DE";
+            PublicHolidayService publicHolidayService = new();
+            var response = await publicHolidayService.GetPublicHolidaysAsync(year, countrycode);
+            var result = await publicHolidayService.ReadContentAsJSON(response);
+
+            // Act
+            var actTest = publicHolidayService.FilterByDaysOff(result, "DE-SH");
+
+            // Assert
+            Assert.IsInstanceOfType(actTest, typeof(PublicHoliday[]));
         }
         #endregion
     }
