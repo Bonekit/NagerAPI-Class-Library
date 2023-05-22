@@ -15,7 +15,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-After Nager canceled the free use of the NuGet-Package to get the public holidays, i created a service class for the Nager API.
+After Nager discontinued the free use of the NuGet package for accessing public holidays, I developed a service class for the Nager API.
 I'm very thankfull that we can use the API for free!
 
 With my service class you can use the following features:
